@@ -1,0 +1,20 @@
+.rectangular-button {
+  display: inline-block;
+  width: 60px; /* 设置按钮宽度 */
+  height: 40px; /* 设置按钮高度 */
+  line-height: 40px; /* 设置按钮内文本的行高使其垂直居中 */
+  text-align: center; /* 文本居中 */
+  border: none; /* 移除边框 */
+  border-radius: 5px; /* 圆角 */
+  background-color: #073f7c; /* 背景色 */
+  text-decoration: none; /* 移除链接的下划线 */
+  color: white; /* 文本颜色 */
+}
+
+.rectangular-button:hover {
+  background-color: #0056b3; /* 鼠标悬停时的背景色 */
+}
+
+.material-icons-outlined {
+  color: inherit; /* 继承父元素的文本颜色 */
+}

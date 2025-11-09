@@ -1,0 +1,127 @@
+/* ---------------------------------------------------
+    SWITCH BUTTON STYLE
+----------------------------------------------------- */
+.checkbox-switch {
+    visibility: hidden;
+    position: absolute;
+}
+
+.switch-button {
+    margin: -13px -16px -16px -16px;
+    display: block;
+    position: relative;
+    top: 50%;
+    background: #fff;
+    width: 130px;
+    height: 75px;
+    cursor: pointer;
+    will-change: background;
+    user-select: none;
+    transform: scale(0.4);
+}
+
+#dark-mode-label.switch-button {
+    margin: -13px -16px -16px -16px;
+    display: block;
+    position: relative;
+    top: 50%;
+    background: #fff;
+    width: 130px;
+    height: 75px;
+    cursor: pointer;
+    will-change: background;
+    user-select: none;
+    transform: scale(0.5);
+}
+
+.switch-button.ios {
+    border-radius: 100px;
+    position: relative;
+    transition: 0s background 0.25s ease-in-out;
+}
+
+.switch-button.ios::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    content: "";
+    display: block;
+    border-radius: 100px;
+    will-change: transform;
+    box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s ease-in-out;
+}
+
+.switch-button.ios::after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    text-align: center;
+    line-height: 4rem;
+    font-family: Consolas, serif;
+    font-size: 19px;
+    height: 65px;
+    width: 65px;
+    top: 5px;
+    left: 5px;
+    background-color: #fff;
+    border-radius: 100px;
+    transition: all 0.25s ease-in-out;
+    transform: translateX(0px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#dark-mode-label::after {
+    content: "Light";
+}
+
+input[type="checkbox"]:checked + #dark-mode-label::after {
+    content: "Dark";
+}
+
+.switch-button.ios:active::after {
+    width: 80px;
+}
+
+input[type="checkbox"]:checked + #dark-mode-label.ios {
+    background: linear-gradient(135deg, #bf7878 0%, #373a68 60%);
+    transition: 0s background 0s ease-in-out;
+}
+
+input[type="checkbox"]:checked + label.ios {
+    background-color: #40E699;
+    transition: 0s background 0s ease-in-out;
+}
+
+input[type="checkbox"]:checked + label.ios:after {
+    transform: translateX(55px);
+}
+
+input[type="checkbox"]:checked + label.ios:active:after {
+    transform: translateX(40px);
+}
+
+input[type="checkbox"]:checked + label.ios:before {
+    transform: translateX(15px) scale(0.1);
+}
+
+.fa-moon {
+    color: #f1c40f;
+    position: absolute;
+    margin: 23px 0 0 26px;
+    transform: scale(1.9);
+}
+
+.fa-sun {
+    color: #f39c12;
+    position: absolute;
+    margin: 23px 0 0 86px;
+    transform: scale(1.9);
+}
+
+.shadow-2 {
+    box-shadow: 0.5rem 0.5rem 0 rgb(233 236 239 / 50%);
+}

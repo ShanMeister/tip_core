@@ -1,0 +1,144 @@
+{% extends "index.html" %}
+{% block title %}
+    標籤管理
+{% endblock %}
+{% block content %}
+<div class="content-page">
+    <div class="maliciousfile-fluid">
+
+        <div class="row">
+            <div class="col">
+                <div class="page-title-box">
+                    <h4 class="page-title">情資標籤管理</h4>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" v-cloak id="vue-app-label-id">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <button data-bs-toggle="modal" data-bs-target="#saveModal" title="新增標籤"
+                                    class="btn btn-primary" v-on:click="saveLabelModal('')">
+                                    <span class="material-icons">add</span>
+                                    <span>新增標籤</span>
+                                </button>
+                            </div>
+
+                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                <select id="pid" class="form-select me-3 w-25" @change="getDataOnSearch()"
+                                    v-model="labelPaging.searchFilter.category">
+                                    <option value="">全部</option>
+                                    <option v-for="item in categoryList" :value="item">
+                                        [[item]]
+                                    </option>
+                                </select>
+                                <div class="input-group w-50">
+                                    <input type="text" placeholder="輸入標籤搜尋" class="form-control"
+                                        v-model="labelPaging.searchFilter.search_text">
+                                    <div class="input-group-append" v-on:click="getDataOnSearch()">
+                                        <span class="input-group-text" href="#">
+                                            <span class="material-icons">search</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-responsive table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">標籤</th>
+                                    <th scope="col">分類</th>
+                                    <th scope="col">作者</th>
+                                    <th scope="col">建立日期</th>
+                                    <th scope="col">修改日期</th>
+                                    <th scope="col">動作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in labelPaging.paging.items">
+                                    <td><span class="badge rounded-pill bg-primary">[[ item.tag ]]</span></td>
+                                    <td>[[ item.category ]]</td>
+                                    <td>[[ item.author?.name ]]</td>
+                                    <td>[[ item.created_date ]]</td>
+                                    <td>[[ item.modify_date ]]</td>
+                                    <td><a title="編輯" class="m-2" v-on:click="saveLabelModal(item.id)"
+                                            data-bs-toggle="modal" data-bs-target="#saveModal">
+                                            <span class="material-icons-outlined action">edit</span>
+                                        </a>
+                                        <a title="刪除" class="m-2" v-on:click="onDeleteLabel(item.id, item.tag)">
+                                            <span class="material-icons-outlined action">delete</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous" v-on:click="updatePage(-1)"
+                                        v-bind:class="{'disabled':labelPaging.paging.current_page === 1}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li v-for="pageNumber in labelPaging.paging.total_page" class="page-item"
+                                    v-on:click="searchPage(pageNumber)"
+                                    v-bind:class="{'active': labelPaging.paging.current_page === pageNumber}">
+                                    <a class="page-link" href="#" v-if="isDisplayPaging(pageNumber)">[[pageNumber]]</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next" v-on:click="updatePage(1)"
+                                        v-bind:class="{'disabled':labelPaging.paging.current_page === labelPaging.paging.total_page}">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveLabelList" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="saveLabelList">編輯</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="inputName" placeholder="標籤"
+                                    v-model="selectLabel.tag">
+                                <label for="floatingInput">標籤</label>
+                                </label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="inputName" placeholder="分類"
+                                    v-model="selectLabel.category">
+                                <label for="floatingInput">分類</label>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" v-on:click="onSaveLabel()">儲存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/statics/js/label.js"></script>
+{% endblock %}
