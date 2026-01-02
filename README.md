@@ -190,3 +190,6 @@ python -m http.server 8000
 - Follow feature-branch workflow and include tests for parsing and enrichment logic.
 - Add or update JSON Schemas in /schemas/ when modifying canonical models.
 - Add a LICENSE file to clarify usage and distribution terms.
+
+[tip_core_Threat_Intelligence_Blueprint.pdf](https://github.com/user-attachments/files/24410641/tip_core_Threat_Intelligence_Blueprint.pdf)
+
